@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AngularWebComponent</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-theme-default@latest/dist/all.css"/>
+<link rel="stylesheet" href="styles.dee3c8ac630e81919b66.css"></head>
+<body>
+  <p><demo-box></demo-box></p>
+  <p><demo-box signuptitle="Amazing newsletter!" thankyoumessage="Thanks for signing up!"></demo-box></p>
+  <second-comp></second-comp>
+  <button class="btnToggle">Toggle Component </button>
+  <p><custom-directive-user-action></custom-directive-user-action></p>
+    
+  <h4>Static grid for JSON communication</h4>
+  <div class="sample-grid container">
+    <div class="row heading">
+      <div class="col-sm">Date</div>
+      <div class="col-sm">Type</div>
+      <div class="col-sm">Description</div>
+      <div class="col-sm">Amount</div>
+      <div class="col-sm">Balance</div>
+      <div class="col-sm">Show in comp</div>
+    </div>
+    <div class="data">
+      <div class="row">
+        <div class="col-sm trnDate">01-Jan-16</div>
+        <div class="col-sm trnType">Deposit</div>
+        <div class="col-sm trnDesc">Cash Deposit</div>
+        <div class="col-sm trnAmt">$1,000,000.00</div>
+        <div class="col-sm trnBal">$1,000,000.00</div>
+      <div class="col-sm edit"><span class="showBtn">Show</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm trnDate">02-Jan-16</div>
+        <div class="col-sm trnType">Debit</div>
+        <div class="col-sm trnDesc">Down Town Grocery</div>
+        <div class="col-sm trnAmt">$250.00</div>
+        <div class="col-sm trnBal">$999,750.00</div>
+        <div class="col-sm edit"><span class="showBtn">Show</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm trnDate">03-Jan-16</div>
+        <div class="col-sm trnType">Debit</div>
+        <div class="col-sm trnDesc">Hot Coffee</div>
+        <div class="col-sm trnAmt">$9.00</div>
+        <div class="col-sm trnBal">$999,741.00</div>
+        <div class="col-sm edit"><span class="showBtn">Show</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm trnDate">04-Jan-16</div>
+        <div class="col-sm trnType">Debit</div>
+        <div class="col-sm trnDesc">The Filling Station</div>
+        <div class="col-sm trnAmt">$88.00</div>
+        <div class="col-sm trnBal">$999,653.00</div>
+        <div class="col-sm edit"><span class="showBtn">Show</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm trnDate">05-Jan-16</div>
+        <div class="col-sm trnType">Debit</div>
+        <div class="col-sm trnDesc">Tinker's Hardware</div>
+        <div class="col-sm trnAmt">$3,421.00</div>
+        <div class="col-sm trnBal">$996,232.00</div>
+        <div class="col-sm edit"><span class="showBtn">Show</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm trnDate">06-Jan-16</div>
+        <div class="col-sm trnType">Debit</div>
+        <div class="col-sm trnDesc">Cutey's Salon</div>
+        <div class="col-sm trnAmt">$700.00</div>
+        <div class="col-sm trnBal">$995,532.00</div>
+        <div class="col-sm edit"><span class="showBtn">Show</span></div>
+      </div>
+    </div>
+    <div id="sentFromComp"></div>
+    <json-comm-comp></json-comm-comp>
+
+    <div>
+      <button class="send-data-wrapper">Click to send data to wrapper</button>
+      <!-- <wrapper-kendo-comp></wrapper-kendo-comp> -->
+    </div>
+  </div>
+
+  <div>
+    <button class="create-comp">Click to add comp</button>
+    <button class="delete-comp">Click to remove comp</button>
+
+  </div>
+  <script>
+    var jsonCommCompTag = document.getElementsByTagName('json-comm-comp');
+    var customDirUsrActComp = document.querySelector('custom-directive-user-action');
+    var wrapperKendoCompTag = document.getElementsByTagName('wrapper-kendo-comp');
+    var jsonToSend = {};
+    var sendData = [{
+      text: 'Furniture',
+      items: [
+        { text: 'Tables & Chairs' },
+        { text: 'Sofas' },
+        { text: 'Occasional Furniture' }
+      ]
+    },
+    {
+      text: 'Decor',
+      items: [
+        { text: 'Bed Linen' },
+        { text: 'Curtains & Blinds' },
+        { text: 'Carpets' }
+      ]
+    }];
+    $(".showBtn").on("click", function() {
+      if(Object.keys(jsonToSend).length > 0 && jsonToSend.construcotr === Object) {
+        jsonToSend = {};
+      } 
+      $(this).parents(".row").children(":not(.edit)").each(function() {
+        var id = $(this).attr("class").toLowerCase().replace('col-sm trn', '');
+        var value = $(this).text();
+        jsonToSend[id] = value;
+      });
+      if(jsonCommCompTag.length > 0){
+        var target = jsonCommCompTag[0];
+        target.receivedJson = jsonToSend;
+      }
+    });
+    window.addEventListener('load',function(){
+      if(jsonCommCompTag.length > 0){
+        jsonCommCompTag[0].addEventListener('json-comm-comp', function(event) {
+          console.log('evtDetails1 >>> ', event.detail.value.message);
+          var dataCollection = event.detail.value.message;
+          var $html = $("#sentFromComp");
+          $html.html('<span class="heading">Color</span><span class="heading">Value</span><br/>');
+          $.each(dataCollection, function(index, item) {
+            $html.append('<span>' + item.color + '</span><span>' + item.value + '</span><br/>');
+          });
+        });
+      }
+    });
+    $(".btnToggle").on("click", function() {
+      customDirUsrActComp.showDiv = !customDirUsrActComp.showDiv;
+    });
+
+    $(".send-data-wrapper").on("click", function() {
+      var testDynHtml = ("<wrapper-kendo-comp></wrapper-kendo-comp>");
+
+      if($(".send-data-wrapper").next("wrapper-kendo-comp").length <= 0 ) {
+        $(".send-data-wrapper").after(testDynHtml);
+      }
+      if(wrapperKendoCompTag.length > 0) {
+        var targetWrapperKendoComp = wrapperKendoCompTag[0];
+        targetWrapperKendoComp.sentData = sendData;
+      }
+    });
+
+    $(".create-comp").on("click", function() {
+      var testHtml = ("<div class='dynamic-comp-holder'><dynamic-comp></dynamic-comp></div>");
+      if($(".create-comp").next("div").length <= 0) {
+        $(".create-comp").after(testHtml);
+        $(".delete-comp").show();
+      }
+    });
+    $(".delete-comp").on("click", function() {
+      $(this).hide();
+      $(".dynamic-comp-holder").remove();
+    });
+  </script>
+<script src="runtime.7b63b9fd40098a2e8207.js" defer></script><script src="polyfills.7865eb64eeb4f25f3111.js" defer></script><script src="main.74ec79c1d08014aed487.js" defer></script></body>
+</html>
