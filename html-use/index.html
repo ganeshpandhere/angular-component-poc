@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example Website with Embedded Angular Web Component</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="demo-box.css">
+</head>
+<body>
+  <div class="jumbotron">
+    <h1 class="display-4">Using Angular Components in Static HTML Page</h1>
+
+    <hr class="my-4">
+    <!-- 1. Base component in static HTML page
+      2. Using kendo component inside base component -->
+
+    <button type="button" class="collapsible">Base Component and Kendo Component inside base component</button>
+    <div class="content">
+      <p><demo-box></demo-box></p>      
+    </div>
+
+    <hr class="my-4">
+    <!-- Send custom parameters to the base component from static HTML page -->
+    <button type="button" class="collapsible">Base Component with custom parameters</button>
+    <div class="content">
+      <p><demo-box signup-title="Amazing newsletter!" thankyou-message="Thanks for signing up!"></demo-box></p>
+    </div>
+
+    <hr class="my-4">
+    <!-- 1. Component using service 
+      2. Invoke child component from parent component -->
+    <button type="button" class="collapsible">Component using service & Invoking child component from parent component</button>
+    <div class="content">
+      <p><second-comp></second-comp></p>
+    </div>
+
+    <hr class="my-4">
+    <!-- Show component on user action -->
+    <button type="button" class="collapsible">Diplay component on user action from plain HTML</button>
+    <div class="content">
+      <h4>Ex 5: Display component on user action</h4>
+      <button class="btnToggle" >Toggle Component </button>
+      <p><custom-directive-user-action></custom-directive-user-action></p>
+    </div>
+
+    <hr class="my-4">
+    <!-- 2 way data communication using JSON -->
+    <button type="button" class="collapsible">2 way Data communication using JSON</button>
+    <div class="content">
+      <h4>Ex 7: Static grid for JSON communication</h4>
+      <div class="sample-grid container">
+        <div class="row heading">
+          <div class="col-sm">Date</div>
+          <div class="col-sm">Type</div>
+          <div class="col-sm">Description</div>
+          <div class="col-sm">Amount</div>
+          <div class="col-sm">Balance</div>
+          <div class="col-sm">Show in Comp</div>
+        </div>
+        <div class="data">
+          <div class="row">
+            <div class="col-sm trnDate">01-Jan-16</div>
+            <div class="col-sm trnType">Deposit</div>
+            <div class="col-sm trnDesc">Cash Deposit</div>
+            <div class="col-sm trnAmt">$1,000,000.00</div>
+            <div class="col-sm trnBal">$1,000,000.00</div>
+          <div class="col-sm edit"><a class="showBtn" href="javascript:void(0);">Show</a></div>
+          </div>
+          <div class="row">
+            <div class="col-sm trnDate">02-Jan-16</div>
+            <div class="col-sm trnType">Debit</div>
+            <div class="col-sm trnDesc">Down Town Grocery</div>
+            <div class="col-sm trnAmt">$250.00</div>
+            <div class="col-sm trnBal">$999,750.00</div>
+            <div class="col-sm edit"><a class="showBtn" href="javascript:void(0);">Show</a></div>
+          </div>
+          <div class="row">
+            <div class="col-sm trnDate">03-Jan-16</div>
+            <div class="col-sm trnType">Debit</div>
+            <div class="col-sm trnDesc">Hot Coffee</div>
+            <div class="col-sm trnAmt">$9.00</div>
+            <div class="col-sm trnBal">$999,741.00</div>
+            <div class="col-sm edit"><a class="showBtn" href="javascript:void(0);">Show</a></div>
+          </div>
+          <div class="row">
+            <div class="col-sm trnDate">04-Jan-16</div>
+            <div class="col-sm trnType">Debit</div>
+            <div class="col-sm trnDesc">The Filling Station</div>
+            <div class="col-sm trnAmt">$88.00</div>
+            <div class="col-sm trnBal">$999,653.00</div>
+            <div class="col-sm edit"><a class="showBtn" href="javascript:void(0);">Show</a></div>
+          </div>
+          <div class="row">
+            <div class="col-sm trnDate">05-Jan-16</div>
+            <div class="col-sm trnType">Debit</div>
+            <div class="col-sm trnDesc">Tinker's Hardware</div>
+            <div class="col-sm trnAmt">$3,421.00</div>
+            <div class="col-sm trnBal">$996,232.00</div>
+            <div class="col-sm edit"><a class="showBtn" href="javascript:void(0);">Show</a></div>
+          </div>
+          <div class="row">
+            <div class="col-sm trnDate">06-Jan-16</div>
+            <div class="col-sm trnType">Debit</div>
+            <div class="col-sm trnDesc">Cutey's Salon</div>
+            <div class="col-sm trnAmt">$700.00</div>
+            <div class="col-sm trnBal">$995,532.00</div>
+            <div class="col-sm edit"><a class="showBtn" href="javascript:void(0);">Show</a></div>
+          </div>
+        </div>
+      </div>
+      <div id="sentFromComp"></div>
+      <hr class="my-4">
+      <json-comm-comp></json-comm-comp>
+    </div>
+
+    <hr class="my-4">
+    <!-- Invoke kendo component from wrapper -->
+    <button type="button" class="collapsible">Invoke Kendo component from wrapper</button>
+    <div class="content">
+        <button class="send-data-wrapper" >Click to send data to wrapper</button>
+    </div>
+
+    <hr class="my-4">
+    <!-- Dynamicly adding HTML and Angular Component to static page -->
+    <button type="button" class="collapsible">Inject component dynamically into HTML</button>
+    <div class="content">
+      <button class="create-comp" >Click to add comp</button>
+      <button class="delete-comp" >Click to remove comp</button>
+    </div>
+  </div>
+
+  <!-- Include component files at the end of body tag to avoid the error where browser renders the custom tag but doesn't understand it -->
+  <script src="demo-box.js"></script>
+
+  <!-- Below script is executing all logic in the interaction of static page and component   -->
+  <script>
+    var jsonCommCompTag = document.getElementsByTagName('json-comm-comp');
+    var jsonToSend = {};
+
+    var customDirUsrActComp = document.querySelector('custom-directive-user-action');
+
+    var wrapperKendoCompTag = document.getElementsByTagName('wrapper-kendo-comp');
+    // Below is sample data to be sent to Kendo Wrapper component
+    var sendData = [{
+      text: 'Furniture',
+      items: [
+        { text: 'Tables & Chairs' },
+        { text: 'Sofas' },
+        { text: 'Occasional Furniture' }
+      ]
+    },
+    {
+      text: 'Decor',
+      items: [
+        { text: 'Bed Linen' },
+        { text: 'Curtains & Blinds' },
+        { text: 'Carpets' }
+      ]
+    }]; 
+    
+    
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+
+    // 2 way data communication using JSON logic START
+    // COde block to send data to component
+    $(".showBtn").on("click", function() {
+      if(Object.keys(jsonToSend).length > 0 && jsonToSend.construcotr === Object) {
+        jsonToSend = {};
+      } 
+      $(this).parents(".row").children(":not(.edit)").each(function() {
+        var id = $(this).attr("class").toLowerCase().replace('col-sm trn', '');
+        var value = $(this).text();
+        jsonToSend[id] = value;
+      });
+      if(jsonCommCompTag.length > 0){
+        var target = jsonCommCompTag[0];
+        target.receivedJson = jsonToSend;
+      }
+    });
+
+    // COde block to receive data from component
+    window.addEventListener('load',function(){
+      if(jsonCommCompTag.length > 0){
+        jsonCommCompTag[0].addEventListener('json-comm-comp', function(event) {
+          var dataCollection = event.detail.value.message;
+          var $html = $("#sentFromComp");
+          $html.html('<span class="heading">Color</span><span class="heading">Value</span><br/>');
+          $.each(dataCollection, function(index, item) {
+            $html.append('<span>' + item.color + '</span><span>' + item.value + '</span><br/>');
+          });
+        });
+      }
+    });
+    // 2 way data communication using JSON logic END
+    
+    // Display component on user action START
+    $(".btnToggle").on("click", function() {
+      customDirUsrActComp.showDiv = !customDirUsrActComp.showDiv;
+    });
+    // Display component on user action END
+
+    // Inject and Invoke Kendo Component from wrapper START
+    $(".send-data-wrapper").on("click", function() {
+      var testDynHtml = ("<wrapper-kendo-comp></wrapper-kendo-comp>");
+
+      if($(".send-data-wrapper").next("wrapper-kendo-comp").length <= 0 ) {
+        $(".send-data-wrapper").after(testDynHtml);
+      }
+      if(wrapperKendoCompTag.length > 0) {
+        var targetWrapperKendoComp = wrapperKendoCompTag[0];
+        targetWrapperKendoComp.sentData = sendData;
+      }
+    });
+    // Inject and Invoke Kendo Component from wrapper END
+
+    // Dynamicly adding HTML and Angular Component to static page START
+    $(".create-comp").on("click", function() {
+      var testHtml = ("<div class='dynamic-comp-holder'><dynamic-comp></dynamic-comp></div>");
+      if($(".create-comp").next("div").length <= 0) {
+        $(".create-comp").after(testHtml);
+        $(".delete-comp").show();
+      }
+    });
+    $(".delete-comp").on("click", function() {
+      $(this).hide();
+      $(".dynamic-comp-holder").remove();
+    });
+    // Dynamicly adding HTML and Angular Component to static page END
+
+  </script>
+</body>
+</html>
