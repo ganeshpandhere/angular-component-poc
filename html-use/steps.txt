@@ -1,0 +1,18 @@
+1. Create ng app 
+2. generate component
+3. add custom element polyfill to support custom elements (npm i --save @ungap/custom-elements)
+4. include @angular/elements library as it provides the Angular function that uses the polyfill to render Angular components
+5. replace app-root with the component tag name
+
+6. adjusting build process
+6.1 remove app.component files
+6.2 update app.module to remove app component.
+6.3 add component tag as entry component
+6.4 use the app module constructor to inject our component and use the registerElement polyfill to define this component as a custom element refer to line #65 in app.module.ts
+
+7. Update ng build command in package.json as below
+"ng build --prod && cat dist/angular-web-component/runtime*.js dist/angular-web-component/polyfills*.js dist/angular-web-component/main*.js > example/demo-box.js && cp dist/angular-web-component/styles.*.css example/demo-box.css"
+
+8. "npm run-script build" to generate single JS and CSS for component
+
+9. Create HTML structure to use newly generated component (html-use/index.html)

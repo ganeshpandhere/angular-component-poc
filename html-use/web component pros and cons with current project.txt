@@ -1,0 +1,25 @@
+1. Drawbacks of using Web components:-
+
+- Main drawback of using web components unsing angular is the bundle size.
+
+-----------------------------------------------------
+
+
+2. Impact advantages and disadvantages with respect to actual project
+
+The impact will depend on following factors:
+- Will need to list out main modules and common modules
+- Export all common modules as individual components / component library so that they can be reused in main modules. (Better approach would be to export as individual as the file size will be reduced).
+- Code refactoring needs to be done in individual main modules.
+- Need to make sure that events are properly captured for data communication to and from the modules
+
+Depending on above factors, the pros and cons will be as below:
+
+Pros:
+1. Distributed modules
+2. Each bundle size will be less
+3. All components can be reused seamlessly.
+
+Cons:
+1. Initially it will be time consuming task to make sure that each component is exported properly.
+2. Given the project strucutre, we can not automate the exporting of modules using single script and need to export modules individually. (https://medium.com/angular-in-depth/how-to-compile-your-angular-components-library-into-web-components-47ff0ac73bd7)
